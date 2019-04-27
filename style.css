@@ -1,8 +1,75 @@
 #timer {
     text-align: center;
     font-size: 5em;
-    background-color: white;
+    background-color: #FDFFFC;
+    color: #011627;
+    margin-bottom: 33px;
+    margin-top: 33px;
 }
 body {
-    background-color: orange;
+    background-color: #011627;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+}
+h1 {
+    color: #FDFFFC;
+    font-size: 3em;
+}
+h2 {
+    color: #FDFFFC;
+    font-size: 2em;
+    margin-top: 66px;
+}
+span {
+    color:#E71D36;
+}
+a {
+    color:#E71D36;
+}
+a:hover {
+    color: #FDFFFC;
+}
+
+#pomodoro {
+    animation: fadein 2s;
+    display: inline-block;
+    text-align: center;
+    border-radius: 66px;
+    width: 333px;
+    margin-top: 33px;
+
+    background: #E71D36;
+}
+#playpause button {
+    margin-top: 0px;
+    border: none;
+    background-color: #E71D36;
+    color: #FDFFFC;
+    border-radius: 8px;
+    font-size: 33px;
+    margin-left: 6px;
+    margin-bottom: 33px;
+
+}
+#playpause button:active {
+    color: red;
+}
+#typeOfTimer {
+    width: 333px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+#typeOfTimer button {
+    color: #011627;
+    border-style: none;
+    border-radius: 33px;
+    width: 66px;
+    height: 66px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    margin: 10px;
+    font-size: 1em;
+
+
 }

@@ -7,22 +7,30 @@ let formattedMinutes = ''
 let interval
 let counter = 0
 
+// Sound that plays when timer reaches 0 / made in Ableton.
 const sound = new Audio('pomodoroSound.mp3')
 
-let eventHelper = true
 
-work.addEventListener('mousedown', function () {
-    setWork()
-    Pomodoro()
-})
-shortBreak.addEventListener('mousedown', function () {
-    setShotBreak()
-    Pomodoro()
-})
-longBreak.addEventListener('mousedown', function () {
-    setLongBreak()
-    Pomodoro()
-})
+
+// Functions for the Play / Pause / Reset buttons.
+
+function start() {
+    if (interval == null) {
+        interval = setInterval(Pomodoro, 1000)
+    }
+}
+function stop() {
+    clearInterval(interval)
+    interval = null
+}
+function reset() {
+    if (confirm('Are you sure you want to reset the timer?')) {
+        seconds = 1501
+        Pomodoro()
+    }
+}
+
+// Event listeners for the Play / Pause / Reset buttons.
 startPomodoro.addEventListener('mousedown', function () {
     start()
 })
@@ -33,61 +41,48 @@ resetPomodoro.addEventListener('mousedown', function () {
     reset()
 })
 
-addTime.addEventListener('mousedown', function () {
-    addWorkTime()
-})
-function addWorkTime() {
-    seconds = seconds + 60
-    minutes = seconds / 60
-    formattedTime()
-    timer.innerHTML = formattedTimer
-}
-
+// Functions for switching between timers.
 function setWork() {
     seconds = 1500
-    typeOfSequence.innerHTML = 'get sum'
-    work.style.backgroundColor = 'blue'
-    shortBreak.style.backgroundColor = 'white'
-    longBreak.style.backgroundColor = 'white'
+    work.style.backgroundColor = '#FDFFFC'
+    shortBreak.style.backgroundColor = '#011627'
+    longBreak.style.backgroundColor = '#011627'
 }
 function setShotBreak() {
     seconds = 300
-    work.style.backgroundColor = 'white'
-    shortBreak.style.backgroundColor = 'blue'
-    longBreak.style.backgroundColor = 'white'
+    work.style.backgroundColor = '#011627'
+    shortBreak.style.backgroundColor = '#FDFFFC'
+    longBreak.style.backgroundColor = '#011627'
 }
 function setLongBreak() {
     seconds = 900
-    work.style.backgroundColor = 'white'
-    shortBreak.style.backgroundColor = 'white'
-    longBreak.style.backgroundColor = 'blue'
+    work.style.backgroundColor = '#011627'
+    shortBreak.style.backgroundColor = '#011627'
+    longBreak.style.backgroundColor = '#FDFFFC'
 }
-function start() {
-    if (interval == null) {
-        interval = setInterval(Pomodoro, 1000)
-    }
 
-}
-function stop() {
-    clearInterval(interval)
-    interval = null
-}
-function reset() {
-    if (confirm('Are you sure you want to reset the timer?')) {
-        seconds = 1501
-        eventHelper = false;
-        Pomodoro()
+// Optional button interactivity to switch between work/short break/long break. Disabled in the final version.
 
-    }
+// work.addEventListener('mousedown', function () {
+//     setWork()
+//     Pomodoro()
+// })
+// shortBreak.addEventListener('mousedown', function () {
+//     setShotBreak()
+//     Pomodoro()
+// })
+// longBreak.addEventListener('mousedown', function () {
+//     setLongBreak()
+//     Pomodoro()
+// })
 
+// Function to keep track and change the sequence of timers.
 
-}
 function sequence() {
     counter = counter + 1
 
     if (counter == 1 || counter == 3 || counter == 5) {
         setShotBreak()
-
         start()
         Pomodoro()
     }
@@ -95,8 +90,6 @@ function sequence() {
         setLongBreak()
         start()
         Pomodoro()
-
-
     }
     else if (counter == 8) {
         setWork()
@@ -109,24 +102,24 @@ function sequence() {
         start()
         Pomodoro()
     }
-
-
 }
+
+// Displays the timer
 
 function display() {
     formattedTime()
-
     timer.innerHTML = formattedTimer
 }
 
-function Pomodoro() {
+// Changes the value and properties of the timer.
 
+function Pomodoro() {
+    
     if (seconds == 0) {
         sound.play()
         clearInterval(interval)
         interval = null
         sequence()
-
     }
     else {
         seconds = seconds - 1
@@ -134,15 +127,15 @@ function Pomodoro() {
         formattedTime()
         timer.innerHTML = formattedTimer
     }
-
     if (seconds <= 10) {
-        timer.style.color = 'red'
+        timer.style.color = '#E71D36'
     }
     else {
-        timer.style.color = 'black'
+        timer.style.color = '#011627'
     }
-
 }
+
+// Formats minutes and seconds variables into a 00:00 format.
 
 function formattedTime() {
 
@@ -166,6 +159,6 @@ function formattedTime() {
     formattedTimer = formattedMinutes + ':' + formattedSeconds
 }
 
-
+setWork()
 display()
-// formattedTime()
+
